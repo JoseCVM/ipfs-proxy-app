@@ -72,7 +72,7 @@ On the examples above, we created a tenant John, gave him a new temporary token,
 This port listens to whatever endpoints your local ipfs node does.
 
 ### keygen_api
-  -API for managing tenants, listens on port 9090 - Giving out keys, collecting telemetry data, disabling tenants etc. Currently NO certification, so ideally you should either authenticate calls made here with a token, or just use it internally (Careful!)
+  - API for managing tenants, listens on port 9090 - Giving out keys, collecting telemetry data, disabling tenants etc. Currently NO certification, so ideally you should either authenticate calls made here with a token, or just use it internally (Careful!)
 
 ## Current keygen_api endpoints:
 
