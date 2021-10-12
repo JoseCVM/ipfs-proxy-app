@@ -1,8 +1,9 @@
 # Project Description
 
-Reverse proxy that sits between a local ipfs node and the internet. You can control who can access the ipfs api through this proxy, and collect telemetry data on calls made (Who made it, request size, etc)
+Reverse proxy that sits between a local ipfs node and the internet. You can control who can access the ipfs api through this proxy, and collect telemetry data on calls made (Who made it, request size, etc). This projects uses auth0 as a higher authority to issue the tokens used by tenants to accesss the API
 
 # Installation
+Clone this repo and navigate to its folder
 
 Check that you have postgresql installed: https://www.postgresql.org/download/linux/ubuntu/
 
@@ -10,6 +11,7 @@ Check that you have cargo installed: ```curl https://sh.rustup.rs -sSf | sh``` o
 
 Check that you have diesel installed: ```cargo install diesel_cli --no-default-features --features postgres```
 
+run:
 
 ```
 diesel setup
@@ -20,7 +22,22 @@ cargo run
 First compilation might take a while, mind you
 
 # Usage
-You need to have cargo, diesel and postgresql installed and working. You will need to have a database at DATABASE_URL with permissions for the user running the server. Open and close ports at will to achieve desired result (Better management of this is a feature to come).
+You need to have cargo, diesel and postgresql installed and working. You will need to have a database at DATABASE_URL with permissions for the user running the server. Open and close ports at will to achieve desired result (Better management of this is a feature to come). Once the server is running, you can test by using ```curl``` on another terminal like so:
+
+```
+curl -X POST -v 127.0.0.1:9090/user/new?username=john
+curl -X POST -v 127.0.0.1:9090/key/generate?username=john
+
+``` 
+Take note of the output from this command - its Johns new key that he can use to access the ipfs api. 
+
+The next example assumes you have a key in the $TOKEN env variable
+```
+curl -H "Authorization: Bearer $TOKEN" -X POST -F file=@myfile "http://127.0.0.1:8080/api/v0/add
+``` 
+
+On the example above, we created a tenant John, gave him a new temporary token, and then he made an "add" call to the ipfs api through our proxy server using his new key.
+
 
 ### ipfs_api
   - Redirects all requests made here (port 8080) to the same url in the local ipfs node. Effectively routes from localhost:8080 to localhost:5001
@@ -41,4 +58,4 @@ This port listens to whatever endpoints your local ipfs node does.
 
 # Further development
 
-This can be used as the basis for a tenant management model through which you can control your ipfs api. Current priority would be in refactoring the code to facilitate future work. Later, finish opening up the API endpoints for key management and telemetry.
+This can be used as the basis for a tenant management model through which you can control your ipfs api. Current priority would be in refactoring the code to facilitate future work. Later, finish opening up the API endpoints for key management and telemetry. Create a front-end app that can use this + tenant authentication to expose a key-issuing/telemetry dashboard
