@@ -28,8 +28,8 @@ CREATE ROLE NAME WITH
 ```
 - Restart the service: ```sudo systemctl restart postgresql```
 (Bear in mind this is NOT a good way to managed db roles and access - this is a toy project still in development!)
-[Example on how to setup the pg_hba.conf file](https://github.com/JoseCVM/ipfs-proxy-app/blob/main/example_hba.PNG)
-[Example on how to setup the roles on postgresql](https://github.com/JoseCVM/ipfs-proxy-app/blob/main/example_roles.PNG)
+[Example on how to setup the pg_hba.conf file](https://github.com/JoseCVM/ipfs-proxy-app/blob/main/example_hba.jpg)
+[Example on how to setup the roles on postgresql](https://github.com/JoseCVM/ipfs-proxy-app/blob/main/example_roles.jpg)
 
 ### Setting the env variables and running for the first time
 Fill the KEY_ID and KEY_SECRET (By asking me for them or by securing a new key provider at auth0 or any other authority, in which case you'll also need to change KEY_PROVIDER and AUTHORITY)
