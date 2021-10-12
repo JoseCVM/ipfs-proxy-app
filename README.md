@@ -4,14 +4,34 @@ Reverse proxy that sits between a local ipfs node and the internet. You can cont
 
 # Installation
 Clone this repo and navigate to its folder
-
+### Postgresql 
 Check that you have postgresql installed: https://www.postgresql.org/download/linux/ubuntu/ and that your current user has adequate privileges
-
+### Cargo
 Check that you have cargo installed: ```curl https://sh.rustup.rs -sSf | sh``` or https://doc.rust-lang.org/cargo/getting-started/installation.html
+### Diesel
+Check that you have diesel installed: ```cargo install diesel_cli --no-default-features --features postgres``` 
 
-Check that you have diesel installed: ```cargo install diesel_cli --no-default-features --features postgres```
+If you have trouble installing diesel, check if you have ```lipq-dev```
+If you have trouble with the ```diesel setup``` step:
+- Check your ```/etc/postgresql/version/main/postgresql.conf``` file and see if diesel is hitting the same door postgresql is using. If not, change to diesel's port 5432 and restart
+- Check your ```/etc/postgresql/version/main/pg_hba.conf```. Add the line ```local   all             NAME                                  trust``` and set local connections to trust or md5
+- Add a super role to postgresql:
+```
+psql -U postgres
+CREATE ROLE NAME WITH
+  LOGIN
+  SUPERUSER
+  INHERIT
+  CREATEDB
+  CREATEROLE
+  REPLICATION;
+```
+- Restart the service: ```sudo systemctl restart postgresql```
 
-run:
+### Setting the env variables and running for the first time
+Fill the KEY_ID and KEY_SECRET (By asking me for them or by securing a new key provider at auth0 or any other authority, in which case you'll also need to change KEY_PROVIDER and AUTHORITY)
+
+Finally, run:
 
 ```
 diesel setup
