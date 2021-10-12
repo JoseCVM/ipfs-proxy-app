@@ -27,6 +27,9 @@ CREATE ROLE NAME WITH
   REPLICATION;
 ```
 - Restart the service: ```sudo systemctl restart postgresql```
+(Bear in mind this is NOT a good way to managed db roles and access - this is a toy project still in development!)
+[Example on how to setup the pg_hba.conf file](https://github.com/JoseCVM/ipfs-proxy-app/blob/main/example_hba.PNG)
+[Example on how to setup the roles on postgresql](https://github.com/JoseCVM/ipfs-proxy-app/blob/main/example_roles.PNG)
 
 ### Setting the env variables and running for the first time
 Fill the KEY_ID and KEY_SECRET (By asking me for them or by securing a new key provider at auth0 or any other authority, in which case you'll also need to change KEY_PROVIDER and AUTHORITY)
@@ -40,6 +43,7 @@ cargo run
 ```
 
 First compilation might take a while, mind you
+If you run into ``` failed to run custom build command for openssl-sys v0.9.39```, check if you have the ```open-pkg``` and ```libssl-dev```
 
 # Usage
 You need to have cargo, diesel and postgresql installed and working. You will need to have a database at DATABASE_URL with permissions for the user running the server. Open and close ports at will to achieve desired result (Better management of this is a feature to come). Once the server is running, you can test by using ```curl``` on another terminal like so:
