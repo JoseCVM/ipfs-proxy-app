@@ -86,4 +86,16 @@ This port listens to whatever endpoints your local ipfs node does.
 
 # Further development
 
-This can be used as the basis for a tenant management model through which you can control your ipfs api. Current priority would be in refactoring the code to facilitate future work. Later, finish opening up the API endpoints for key management and telemetry. Create a front-end app that can use this + tenant authentication to expose a key-issuing/telemetry dashboard
+This can be used as the basis for a tenant management model through which you can control your ipfs api. Current priority would be in refactoring the code to facilitate future work. Later, finish opening up the API endpoints for key management and telemetry. Create a front-end app that can use this + tenant authentication to expose a key-issuing/telemetry dashboard. 
+
+A "Next steps" tasklist coudl be:
+- Refactor code to improve reusability and make development easier 
+- Design what the final app will do, what it will manage, etc
+- Improve server usability by designing and implementing a CLI for it (clap for rust is good)
+- Add error logging middleware to actix server
+- Expose endpoints for better tenant/key management
+- Create a react app that facilitates management of the proxy server's tenants
+- Use telemetry data to setup tenant dashboard, requests/data volume used etc
+- Add authentication to react app and expose it to the internet to allow tenants to self-manage
+
+IPFS is a neat, decentralized and safe protocol. Its problem is the lack of adoption due to technical cost, and high bandwidth usage when compared to HTTP. These HTTP proxies for local IPFS nodes are a step forward in popularizing the protocol, as they essentially "convert" the calls made by users without them noticing.
