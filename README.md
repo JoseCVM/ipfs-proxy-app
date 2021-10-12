@@ -46,6 +46,7 @@ cargo run
 ```
 
 First compilation might take a while, mind you
+
 If you run into ``` failed to run custom build command for openssl-sys v0.9.39```, check if you have the ```open-pkg``` and ```libssl-dev```
 
 # Usage
