@@ -35,7 +35,7 @@ CREATE ROLE NAME WITH
 [Example on how to setup the roles on postgresql](example_roles.jpg)
 
 ### Setting the env variables and running for the first time
-Fill the KEY_ID and KEY_SECRET (By asking me for them or by securing a new key provider at auth0 or any other authority, in which case you'll also need to change KEY_PROVIDER and AUTHORITY)
+Fill the KEY_ID and KEY_SECRET located in the .env file (By asking me for them or by securing a new key provider at auth0 or any other authority, in which case you'll also need to change KEY_PROVIDER and AUTHORITY)
 
 Finally, run:
 
