@@ -27,6 +27,7 @@ CREATE ROLE NAME WITH
   REPLICATION;
 ```
 - Restart the service: ```sudo systemctl restart postgresql```
+- 
 (Bear in mind this is NOT a good way to managed db roles and access - this is a toy project still in development!)
 
 [Example on how to setup the pg_hba.conf file](example_hba.jpg)
