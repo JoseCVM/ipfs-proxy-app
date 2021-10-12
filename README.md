@@ -11,6 +11,8 @@ Check that you have cargo installed: ```curl https://sh.rustup.rs -sSf | sh``` o
 
 Check that you have diesel installed: ```cargo install diesel_cli --no-default-features --features postgres```
 
+Fill the KEY_ID and KEY_SECRET (By asking me for them or by securing a new key provider at auth0 or any other authority, in which case you'll also need to change KEY_PROVIDER and AUTHORITY)
+
 run:
 
 ```
