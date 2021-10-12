@@ -1,23 +1,20 @@
 ### Project Description
 
-This is a toy project that implements a simple authenticated proxy server for IPFS. 
-The idea is that you can block incoming traffic from the ports used by the IPFS node you run locally, and manually add handlers for each ipfs api call you want to expose
+Reverse proxy that sits between a local ipfs node and the internet. You can control who can access the ipfs api through this proxy, and collect telemetry data on calls made (Who made it, request size, etc)
 
-The authentication is done externally by Auth0. Afterwards, you can give out Auth0 api keys to users and let them use the ipfs calls you exposed. For example, you could use this
-as a service on your application and give out keys to users as they register.
 
-### What we have so far
+### Usage
+You need to have cargo, diesel and postgresql installed and working. You will need to have a database at DATABASE_URL with permissions for the user running the server. Open and close ports at will
+Apps used:
+ipfs_api: Redirects all requests made here (port 8080) to the same url in the local ipfs node. Effectively routes from localhost:8080 to localhost:5001
+This port listens to whatever endpoints your local ipfs node does.
+keygen_api: API for managing tenants, listens on port 9090 - Giving out keys, collecting telemetry data, disabling tenants etc. Currently NO certification, so ideally you should either authenticate calls made here with a token, or just use it internally (Careful!)
+Current keygen_api endpoints:
+"/user/new?username=NAME" - Creates a new tenant with a unique username
+"/user/list" - Lists all users
+"/user/keys?username=NAME" - Lists all keys given to NAME
+"/key/generate?username=NAME" - Gives out a new key to NAME
 
-Authentication, enabling/disabling of authentication keys, only authenticated users can run API calls. Currently keys are supplied on-demand by the administrator.
+### Further development
 
-All requests are logged to the database (postgresql, using diesel to connect from within rust) as a pair of key/request, so we can retrieve all requests. This isn't exposed as an endpoint to this API for obvious reasons - we don't want outside users looking at our telemetry data. Instead, you should just check it locally.
-
-It is by design that we don't just forward all API calls and instead route them one by one - we only expose what we need/want to expose.
-
-### To Do:
-
-All API calls done to our server need to replace / for _ (swarm/peers becomes swarm_peers). Fix this so OUR_SERVER/api/v0/swarm/peers works.
-
-Currently requests are mocked by a simple CURL that prints output to stdout - make a more robust reqwest client class for this application so the addition/removal of new endpoints is simple, just take the existing request, strip the API key, edit URI, forward to local ipfs node and return the response.
-
-Improve on logging, actix has great logger middleware that could be used here.
+This can be used as the basis for a tenant management model through which you can control your ipfs api. Current priority would be in refactoring the code to facilitate future work. Later, finish opening up the API endpoints for key management and telemetry.
