@@ -5,7 +5,7 @@ Reverse proxy that sits between a local ipfs node and the internet. You can cont
 # Installation
 Clone this repo and navigate to its folder
 
-Check that you have postgresql installed: https://www.postgresql.org/download/linux/ubuntu/
+Check that you have postgresql installed: https://www.postgresql.org/download/linux/ubuntu/ and that your current user has adequate privileges
 
 Check that you have cargo installed: ```curl https://sh.rustup.rs -sSf | sh``` or https://doc.rust-lang.org/cargo/getting-started/installation.html
 
