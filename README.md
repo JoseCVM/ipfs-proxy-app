@@ -64,7 +64,7 @@ The next example assumes you have a key in the $TOKEN env variable
 curl -H "Authorization: Bearer $TOKEN" -X POST -F file=@myfile "http://127.0.0.1:8080/api/v0/add
 ``` 
 
-On the example above, we created a tenant John, gave him a new temporary token, and then he made an "add" call to the ipfs api through our proxy server using his new key.
+On the examples above, we created a tenant John, gave him a new temporary token, and then he made an "add" call to the ipfs api through our proxy server using his new key.
 
 
 ### ipfs_api
